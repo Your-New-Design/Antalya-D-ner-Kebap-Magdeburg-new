@@ -177,7 +177,13 @@ export function AntalyaSite() {
         openCookies={() => setCookieSettingsOpen(true)}
       />
 
-      <CookieBanner show={mounted && consent === null} t={t} onAcceptAll={acceptAll} onNecessaryOnly={necessaryOnly} />
+      <CookieBanner
+        show={mounted && consent === null}
+        t={t}
+        onAcceptAll={acceptAll}
+        onNecessaryOnly={necessaryOnly}
+        onOpenSettings={() => setCookieSettingsOpen(true)}
+      />
 
       <ImprintModal open={imprintOpen} onClose={() => setImprintOpen(false)} />
       <PrivacyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
@@ -186,6 +192,7 @@ export function AntalyaSite() {
         onClose={() => setCookieSettingsOpen(false)}
         onAcceptAll={acceptAll}
         onNecessaryOnly={necessaryOnly}
+        consent={consent}
         t={t}
       />
     </>

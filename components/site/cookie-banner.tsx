@@ -5,9 +5,10 @@ interface CookieBannerProps {
   t: any
   onAcceptAll: () => void
   onNecessaryOnly: () => void
+  onOpenSettings: () => void
 }
 
-export function CookieBanner({ show, t, onAcceptAll, onNecessaryOnly }: CookieBannerProps) {
+export function CookieBanner({ show, t, onAcceptAll, onNecessaryOnly, onOpenSettings }: CookieBannerProps) {
   if (!show) return null
 
   return (
@@ -73,6 +74,24 @@ export function CookieBanner({ show, t, onAcceptAll, onNecessaryOnly }: CookieBa
           }}
         >
           {t.cookie.necessaryOnly}
+        </button>
+        <button
+          onClick={onOpenSettings}
+          style={{
+            background: "transparent",
+            color: "#f5c518",
+            border: "none",
+            borderRadius: 999,
+            padding: "11px 14px",
+            fontWeight: 600,
+            cursor: "pointer",
+            fontFamily: "inherit",
+            fontSize: 14,
+            textDecoration: "underline",
+            textUnderlineOffset: 3,
+          }}
+        >
+          {t.cookie.settings}
         </button>
       </div>
     </div>
