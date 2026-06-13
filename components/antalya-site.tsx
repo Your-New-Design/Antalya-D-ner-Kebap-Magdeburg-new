@@ -144,7 +144,7 @@ export function AntalyaSite() {
 
   return (
     <>
-      <SiteHeader lang={lang} setLang={setLang} t={t} phoneHref={REST.phoneHref} />
+      <SiteHeader lang={lang} setLang={setLang} t={t} phoneHref={REST.phoneHref} reviewHref={REST.review} />
 
       <main>
         <Hero t={t} />

@@ -17,11 +17,17 @@ export const REST = {
   email: "antalyadoener6@gmail.com",
   address: "Am Florapark 125, 39128 Magdeburg",
   maps: "https://www.google.com/maps/search/?api=1&query=Antalya+D%C3%B6ner+%26+Kebab+Am+Florapark+125+39128+Magdeburg",
+  // Opens Google Maps route planning; the user's current location is used as the start automatically
+  directions:
+    "https://www.google.com/maps/dir/?api=1&destination=Antalya+D%C3%B6ner+%26+Kebab+Am+Florapark+125+39128+Magdeburg",
+  // Opens the Google review dialog for the business
+  review:
+    "https://search.google.com/local/writereview?q=Antalya+D%C3%B6ner+%26+Kebab+Am+Florapark+125+39128+Magdeburg",
 }
 
 export const TR = {
   de: {
-    nav: { menu: "Speisekarte", about: "Über uns", contact: "Kontakt", callOrder: "Anrufen & Bestellen" },
+    nav: { menu: "Speisekarte", about: "Über uns", contact: "Kontakt", callOrder: "Anrufen & Bestellen", review: "Bewertung" },
     hero: {
       subline: "Magdeburgs heißester Döner — frisch geschnitten am Florapark.",
       preorder: "Jetzt vorbestellen",
@@ -92,7 +98,7 @@ export const TR = {
     },
   },
   en: {
-    nav: { menu: "Menu", about: "About", contact: "Contact", callOrder: "Call & Order" },
+    nav: { menu: "Menu", about: "About", contact: "Contact", callOrder: "Call & Order", review: "Review" },
     hero: {
       subline: "Magdeburg's hottest döner — freshly sliced at Florapark.",
       preorder: "Pre-order now",
@@ -163,7 +169,7 @@ export const TR = {
     },
   },
   tr: {
-    nav: { menu: "Menü", about: "Hakkımızda", contact: "İletişim", callOrder: "Ara & Sipariş Ver" },
+    nav: { menu: "Menü", about: "Hakkımızda", contact: "İletişim", callOrder: "Ara & Sipariş Ver", review: "Değerlendir" },
     hero: {
       subline: "Magdeburg'un en lezzetli döneri — Florapark'ta taze kesim.",
       preorder: "Hemen ön sipariş",
@@ -234,7 +240,7 @@ export const TR = {
     },
   },
   ar: {
-    nav: { menu: "قائمة الطعام", about: "من نحن", contact: "اتصل بنا", callOrder: "اتصل واطلب" },
+    nav: { menu: "قائمة الطعام", about: "من نحن", contact: "اتصل بنا", callOrder: "اتصل واطلب", review: "تقييم" },
     hero: {
       subline: "ألذ دونر في ماغدبورغ — مقطّع طازجاً في فلوراپارك.",
       preorder: "اطلب مسبقاً الآن",
@@ -246,7 +252,7 @@ export const TR = {
     categories: {
       doner: "أطباق الدونر",
       pizza: "بيتزا تركية",
-      durum: "دورم",
+      durum: "��ورم",
       teller: "أطباق وعلب",
       fastfood: "وجبات سريعة",
       salate: "سلطات",

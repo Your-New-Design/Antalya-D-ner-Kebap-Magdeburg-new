@@ -192,7 +192,7 @@ export function Contact({ t, rest, mapAllowed }: { t: any; rest: any; mapAllowed
                 39128 MAGDEBURG
               </div>
               <a
-                href={rest.maps}
+                href={rest.directions}
                 target="_blank"
                 rel="noopener"
                 style={{
