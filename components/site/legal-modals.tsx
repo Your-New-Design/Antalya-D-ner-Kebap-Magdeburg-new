@@ -102,6 +102,8 @@ export function ImprintModal({ open, onClose }: { open: boolean; onClose: () => 
       <p style={{ margin: 0 }}>
         {REST.name}
         <br />
+        Inhaber: Faisal Syed
+        <br />
         {REST.address}
         <br />
         Deutschland
