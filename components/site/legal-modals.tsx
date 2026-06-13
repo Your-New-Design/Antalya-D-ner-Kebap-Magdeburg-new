@@ -92,6 +92,7 @@ const h3style: React.CSSProperties = {
   fontSize: 16,
   color: "#f7efe3",
   margin: "22px 0 8px",
+  textShadow: "0 2px 8px rgba(0,0,0,.4)",
 }
 
 export function ImprintModal({ open, onClose }: { open: boolean; onClose: () => void }) {
