@@ -1,0 +1,50 @@
+<h2 class="sr-only">Sprachumschalter im PROTEGO-Design: vier Pills mit der Nationalflagge hinter dem Sprachcode (DE, EN, TR, AR); alle Flaggen füllen die Pill vollständig aus, die aktive Sprache ist amberfarben hervorgehoben.</h2>
+<style>
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pg-stage{background:#16181d;border-radius:var(--border-radius-lg);padding:30px 18px;display:flex;justify-content:center}
+.pg-bar{display:inline-flex;gap:8px;padding:8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045)}
+.pg-lang{position:relative;overflow:hidden;border:2px solid transparent;border-radius:12px;height:48px;min-width:70px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;font-family:var(--font-sans)}
+.pg-lang .pg-flag{position:absolute;inset:0;width:100%;height:100%;opacity:.92}
+.pg-lang .pg-flag svg{display:block;width:100%;height:100%}
+.pg-lang .pg-veil{position:absolute;inset:0;background:rgba(8,10,14,.6);transition:background .2s}
+.pg-lang .pg-cc{position:relative;font-size:18px;font-weight:500;letter-spacing:.5px;color:#eceef1}
+.pg-lang[aria-pressed="true"]{border-color:#e6a23a}
+.pg-lang[aria-pressed="true"] .pg-veil{background:rgba(8,10,14,.34)}
+.pg-lang[aria-pressed="true"] .pg-cc{color:#f3b955}
+.pg-lang:focus-visible{outline:2px solid #3b82c8;outline-offset:2px}
+</style>
+<div class="pg-stage">
+  <div class="pg-bar" role="group" aria-label="Sprache wählen">
+    <button class="pg-lang" aria-pressed="true" aria-label="Deutsch">
+      <span class="pg-flag" aria-hidden="true"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice"><rect width="60" height="13.34" fill="#000"/><rect y="13.34" width="60" height="13.33" fill="#dd0000"/><rect y="26.67" width="60" height="13.33" fill="#ffce00"/></svg></span>
+      <span class="pg-veil"></span>
+      <span class="pg-cc">DE</span>
+    </button>
+    <button class="pg-lang" aria-pressed="false" aria-label="English">
+      <span class="pg-flag" aria-hidden="true"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice"><clipPath id="pgUk3"><rect width="60" height="40"/></clipPath><g clip-path="url(#pgUk3)"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"/><path d="M0,0 L60,40" stroke="#c8102e" stroke-width="4"/><path d="M60,0 L0,40" stroke="#c8102e" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="12"/><path d="M30,0 V40 M0,20 H60" stroke="#c8102e" stroke-width="7"/></g></svg></span>
+      <span class="pg-veil"></span>
+      <span class="pg-cc">EN</span>
+    </button>
+    <button class="pg-lang" aria-pressed="false" aria-label="Türkçe">
+      <span class="pg-flag" aria-hidden="true"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice"><rect width="60" height="40" fill="#e30a17"/><circle cx="25" cy="20" r="9" fill="#fff"/><circle cx="28" cy="20" r="7" fill="#e30a17"/><path d="M39,14.5 l1.6,3.4 3.7,0.3 -2.8,2.4 0.9,3.6 -3.4,-2 -3.4,2 0.9,-3.6 -2.8,-2.4 3.7,-0.3 z" fill="#fff"/></svg></span>
+      <span class="pg-veil"></span>
+      <span class="pg-cc">TR</span>
+    </button>
+    <button class="pg-lang" aria-pressed="false" aria-label="العربية">
+      <span class="pg-flag" aria-hidden="true"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice"><rect width="60" height="40" fill="#fff"/><rect x="15" width="45" height="13.34" fill="#00732f"/><rect x="15" y="26.67" width="45" height="13.33" fill="#000"/><rect width="15" height="40" fill="#ff0000"/></svg></span>
+      <span class="pg-veil"></span>
+      <span class="pg-cc">AR</span>
+    </button>
+  </div>
+</div>
+<script>
+(function(){
+  var bar=document.currentScript.parentElement.querySelector('.pg-bar');
+  bar.querySelectorAll('.pg-lang').forEach(function(b){
+    b.addEventListener('click',function(){
+      bar.querySelectorAll('.pg-lang').forEach(function(x){x.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true');
+    });
+  });
+})();
+</script>
