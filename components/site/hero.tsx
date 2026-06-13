@@ -88,7 +88,6 @@ export function Hero({ t }: { t: any }) {
             display: "block",
             position: "relative",
             zIndex: 20,
-            marginTop: "clamp(-32px,-4vw,-58px)",
             fontSize: "clamp(58px,11.5vw,168px)",
             lineHeight: 0.86,
             background: "linear-gradient(180deg,#ffffff 6%,#d6d8de 38%,#8b8e96 60%,#eef0f4 88%)",
