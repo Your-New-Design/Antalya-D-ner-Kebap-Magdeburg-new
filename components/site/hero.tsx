@@ -1,8 +1,11 @@
 "use client"
 
 import { SpinRing } from "@/components/spin-ring"
+import { useOpenStatus } from "@/lib/use-open-status"
 
 export function Hero({ t }: { t: any }) {
+  const open = useOpenStatus()
+
   return (
     <section
       id="top"
@@ -181,11 +184,18 @@ export function Hero({ t }: { t: any }) {
                 width: 9,
                 height: 9,
                 borderRadius: "50%",
-                background: "#46d17a",
-                boxShadow: "0 0 0 4px rgba(70,209,122,.18)",
+                background: open === false ? "#e8401f" : "#46d17a",
+                boxShadow: open === false ? "0 0 0 4px rgba(232,64,31,.18)" : "0 0 0 4px rgba(70,209,122,.18)",
                 flexShrink: 0,
+                transition: "background .3s, box-shadow .3s",
               }}
             />
+            {open !== null && (
+              <span style={{ fontWeight: 700, color: open ? "#5fd178" : "#f5926f" }}>
+                {open ? t.contact.openNow : t.contact.closedNow}
+                {" · "}
+              </span>
+            )}
             {t.hero.hours}
           </span>
         </div>

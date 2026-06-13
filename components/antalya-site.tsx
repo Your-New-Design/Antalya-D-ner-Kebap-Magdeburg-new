@@ -37,6 +37,12 @@ export function AntalyaSite() {
 
   useScrollEffects([cat, lang])
 
+  // Always start at the top on (re)load instead of restoring the previous scroll position.
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual"
+    window.scrollTo(0, 0)
+  }, [])
+
   // Restore persisted state once on mount.
   useEffect(() => {
     try {

@@ -1,6 +1,7 @@
 "use client"
 
 import { SpinRing } from "@/components/spin-ring"
+import { useOpenStatus } from "@/lib/use-open-status"
 
 interface FooterProps {
   t: any
@@ -11,6 +12,8 @@ interface FooterProps {
 }
 
 export function SiteFooter({ t, rest, openImprint, openPrivacy, openCookies }: FooterProps) {
+  const open = useOpenStatus()
+
   return (
     <footer style={{ background: "#0c0a08", borderTop: "1px solid rgba(245,197,24,.16)", padding: "54px 24px 28px" }}>
       <div className="footer-grid" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gap: 34, alignItems: "start" }}>
@@ -57,6 +60,41 @@ export function SiteFooter({ t, rest, openImprint, openPrivacy, openCookies }: F
             <br />
             {t.contact.sun}: {t.contact.sunClosed}
           </div>
+          {open !== null && (
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                marginTop: 14,
+                padding: "6px 12px",
+                borderRadius: 999,
+                background: open ? "rgba(46,160,67,.12)" : "rgba(232,64,31,.12)",
+                border: `1px solid ${open ? "rgba(46,160,67,.4)" : "rgba(232,64,31,.4)"}`,
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  background: open ? "#2ea043" : "#e8401f",
+                  boxShadow: `0 0 0 3px ${open ? "rgba(46,160,67,.22)" : "rgba(232,64,31,.22)"}`,
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "var(--font-bricolage), sans-serif",
+                  fontWeight: 700,
+                  fontSize: 13,
+                  color: open ? "#5fd178" : "#f5926f",
+                }}
+              >
+                {open ? t.contact.openNow : t.contact.closedNow}
+              </span>
+            </div>
+          )}
         </div>
         <div>
           <div

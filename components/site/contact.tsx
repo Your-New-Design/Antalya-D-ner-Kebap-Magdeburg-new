@@ -1,6 +1,10 @@
 "use client"
 
+import { useOpenStatus } from "@/lib/use-open-status"
+
 export function Contact({ t, rest, mapAllowed }: { t: any; rest: any; mapAllowed: boolean }) {
+  const open = useOpenStatus()
+
   return (
     <section id="contact" style={{ padding: "80px 24px 90px", scrollMarginTop: 80 }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
@@ -130,6 +134,41 @@ export function Contact({ t, rest, mapAllowed }: { t: any; rest: any; mapAllowed
                   <span>{t.contact.sun}</span>
                   <span>{t.contact.sunClosed}</span>
                 </div>
+                {open !== null && (
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      marginTop: 14,
+                      padding: "7px 14px",
+                      borderRadius: 999,
+                      background: open ? "rgba(46,160,67,.12)" : "rgba(232,64,31,.12)",
+                      border: `1px solid ${open ? "rgba(46,160,67,.4)" : "rgba(232,64,31,.4)"}`,
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: 9,
+                        height: 9,
+                        borderRadius: "50%",
+                        background: open ? "#2ea043" : "#e8401f",
+                        boxShadow: `0 0 0 3px ${open ? "rgba(46,160,67,.22)" : "rgba(232,64,31,.22)"}`,
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "var(--font-bricolage), sans-serif",
+                        fontWeight: 700,
+                        fontSize: 13.5,
+                        color: open ? "#5fd178" : "#f5926f",
+                      }}
+                    >
+                      {open ? t.contact.openNow : t.contact.closedNow}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
