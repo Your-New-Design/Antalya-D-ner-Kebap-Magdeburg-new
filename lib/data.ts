@@ -20,9 +20,9 @@ export const REST = {
   // Opens Google Maps route planning; the user's current location is used as the start automatically
   directions:
     "https://www.google.com/maps/dir/?api=1&destination=Antalya+D%C3%B6ner+%26+Kebab+Am+Florapark+125+39128+Magdeburg",
-  // Opens the Google review dialog for the business
+  // Opens the Google Maps business profile (reviews + "Write a review"); works on desktop and opens the Maps app on mobile
   review:
-    "https://search.google.com/local/writereview?q=Antalya+D%C3%B6ner+%26+Kebab+Am+Florapark+125+39128+Magdeburg",
+    "https://www.google.com/maps/search/?api=1&query=Antalya%20D%C3%B6ner%20%26%20Kebab%2C%20Am%20Florapark%20125%2C%2039128%20Magdeburg",
 }
 
 export const TR = {
