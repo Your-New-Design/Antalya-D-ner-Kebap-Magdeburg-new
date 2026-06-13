@@ -35,7 +35,7 @@ export function AntalyaSite() {
   // null = no choice yet, "all" | "necessary"
   const [consent, setConsent] = useState<"all" | "necessary" | null>(null)
 
-  useScrollEffects()
+  useScrollEffects([cat, lang])
 
   // Restore persisted state once on mount.
   useEffect(() => {
