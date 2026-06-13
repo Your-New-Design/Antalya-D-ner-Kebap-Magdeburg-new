@@ -1,40 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
-
-// Opening hours of the shop: Mon–Sat 10:00–20:00, Sunday closed.
-// Evaluated in the restaurant's timezone (Europe/Berlin) so the status is
-// correct no matter where the visitor is located.
-function computeOpen(): boolean {
-  try {
-    const parts = new Intl.DateTimeFormat("en-US", {
-      timeZone: "Europe/Berlin",
-      weekday: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    }).formatToParts(new Date())
-    const weekday = parts.find((p) => p.type === "weekday")?.value ?? ""
-    const hour = Number.parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10)
-    const minute = Number.parseInt(parts.find((p) => p.type === "minute")?.value ?? "0", 10)
-    if (weekday === "Sun") return false // closed on Sundays
-    const minutes = hour * 60 + minute
-    return minutes >= 10 * 60 && minutes < 20 * 60 // 10:00–20:00
-  } catch {
-    return false
-  }
-}
+import { useOpenStatus } from "@/lib/use-open-status"
 
 export function Contact({ t, rest, mapAllowed }: { t: any; rest: any; mapAllowed: boolean }) {
-  // null until mounted to avoid a hydration mismatch between server and client.
-  const [open, setOpen] = useState<boolean | null>(null)
-
-  useEffect(() => {
-    setOpen(computeOpen())
-    // Re-check every minute so the badge flips at opening/closing time.
-    const id = setInterval(() => setOpen(computeOpen()), 60_000)
-    return () => clearInterval(id)
-  }, [])
+  const open = useOpenStatus()
 
   return (
     <section id="contact" style={{ padding: "80px 24px 90px", scrollMarginTop: 80 }}>
