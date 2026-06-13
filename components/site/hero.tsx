@@ -78,6 +78,8 @@ export function Hero({ t }: { t: any }) {
               lineHeight: 0.9,
               textShadow: "0 4px 28px rgba(229,34,41,.4)",
               transitionDelay: ".05s",
+              fontWeight: 700,
+              textTransform: "capitalize",
             }}
           >
             Antalya
@@ -88,19 +90,20 @@ export function Hero({ t }: { t: any }) {
             display: "block",
             position: "relative",
             zIndex: 20,
-            fontSize: "clamp(58px,11.5vw,168px)",
+            fontSize: "96px",
             lineHeight: 0.86,
             background: "linear-gradient(180deg,#ffffff 6%,#d6d8de 38%,#8b8e96 60%,#eef0f4 88%)",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
             WebkitTextFillColor: "transparent",
             filter: "drop-shadow(0 3px 10px rgba(0,0,0,.5))",
-            fontFamily: "var(--font-bricolage), sans-serif",
-            fontWeight: 800,
-            textTransform: "uppercase",
+            fontFamily: '"Oswald", sans-serif',
+            fontWeight: 700,
+            fontStyle: "italic",
+            textTransform: "capitalize",
           }}
         >
-          Döner <span style={{ fontSize: "clamp(34px,6vw,86px)" }}>&amp; Kebab</span>
+          Döner <span style={{ fontSize: "96px" }}>&amp; Kebab</span>
         </span>
         <p
           data-reveal=""
