@@ -134,6 +134,7 @@ export function AntalyaSite() {
       <main>
         <Hero t={t} />
         <Marquee />
+        <Stats lang={lang} />
         <Signature sig={sig} onOrder={scrollToMenu} />
         <MenuSection
           lang={lang}
@@ -149,7 +150,6 @@ export function AntalyaSite() {
           phoneHref={REST.phoneHref}
         />
         <AllergenLegend />
-        <Stats lang={lang} />
         <About t={t} sig={sig} badges={[t.about.badge1, t.about.badge2, t.about.badge3]} onOrder={scrollToMenu} />
         <Contact t={t} rest={REST} mapAllowed={mapAllowed} />
       </main>
