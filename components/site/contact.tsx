@@ -1,6 +1,41 @@
 "use client"
 
+import { useEffect, useState } from "react"
+
+// Opening hours of the shop: Mon–Sat 10:00–20:00, Sunday closed.
+// Evaluated in the restaurant's timezone (Europe/Berlin) so the status is
+// correct no matter where the visitor is located.
+function computeOpen(): boolean {
+  try {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Europe/Berlin",
+      weekday: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).formatToParts(new Date())
+    const weekday = parts.find((p) => p.type === "weekday")?.value ?? ""
+    const hour = Number.parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10)
+    const minute = Number.parseInt(parts.find((p) => p.type === "minute")?.value ?? "0", 10)
+    if (weekday === "Sun") return false // closed on Sundays
+    const minutes = hour * 60 + minute
+    return minutes >= 10 * 60 && minutes < 20 * 60 // 10:00–20:00
+  } catch {
+    return false
+  }
+}
+
 export function Contact({ t, rest, mapAllowed }: { t: any; rest: any; mapAllowed: boolean }) {
+  // null until mounted to avoid a hydration mismatch between server and client.
+  const [open, setOpen] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    setOpen(computeOpen())
+    // Re-check every minute so the badge flips at opening/closing time.
+    const id = setInterval(() => setOpen(computeOpen()), 60_000)
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <section id="contact" style={{ padding: "80px 24px 90px", scrollMarginTop: 80 }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
@@ -130,6 +165,41 @@ export function Contact({ t, rest, mapAllowed }: { t: any; rest: any; mapAllowed
                   <span>{t.contact.sun}</span>
                   <span>{t.contact.sunClosed}</span>
                 </div>
+                {open !== null && (
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      marginTop: 14,
+                      padding: "7px 14px",
+                      borderRadius: 999,
+                      background: open ? "rgba(46,160,67,.12)" : "rgba(232,64,31,.12)",
+                      border: `1px solid ${open ? "rgba(46,160,67,.4)" : "rgba(232,64,31,.4)"}`,
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: 9,
+                        height: 9,
+                        borderRadius: "50%",
+                        background: open ? "#2ea043" : "#e8401f",
+                        boxShadow: `0 0 0 3px ${open ? "rgba(46,160,67,.22)" : "rgba(232,64,31,.22)"}`,
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "var(--font-bricolage), sans-serif",
+                        fontWeight: 700,
+                        fontSize: 13.5,
+                        color: open ? "#5fd178" : "#f5926f",
+                      }}
+                    >
+                      {open ? t.contact.openNow : t.contact.closedNow}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
