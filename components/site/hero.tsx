@@ -67,7 +67,7 @@ export function Hero({ t }: { t: any }) {
             Magdeburg · Am Florapark
           </span>
         </div>
-        <h1 style={{ lineHeight: 0.82, margin: "4px 0 0" }}>
+        <h1 style={{ lineHeight: 0.82, margin: "4px 0 0", position: "relative", zIndex: 10 }}>
           <span
             data-reveal=""
             style={{
@@ -86,6 +86,8 @@ export function Hero({ t }: { t: any }) {
         <span
           style={{
             display: "block",
+            position: "relative",
+            zIndex: 20,
             fontSize: "clamp(58px,11.5vw,168px)",
             lineHeight: 0.86,
             background: "linear-gradient(180deg,#ffffff 6%,#d6d8de 38%,#8b8e96 60%,#eef0f4 88%)",
