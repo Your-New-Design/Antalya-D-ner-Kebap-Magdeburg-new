@@ -449,13 +449,13 @@ export const ALLERGENS: Record<string, string[]> = {
   t30: ["A", "G", "J"], t31: ["A", "G", "J"], t32: ["A", "G", "J"], t33: ["A", "G", "J"],
   t34: ["A", "G", "J"], t35: ["A", "G", "J"], t36: ["A", "G", "J"], t37: ["A", "G", "J"],
   t38: ["A", "G", "J"], t39: ["A", "G", "J"],
-  f40: ["A", "L"], f41: ["A", "C", "G"], f42: ["A", "C", "G", "J"],
+  f40: ["A"], f41: ["A", "C", "G"], f42: ["A", "C", "G", "J"],
   f43: ["A", "C", "G", "J"], f44: ["A", "C", "G", "J"], f45: ["A", "C", "G"],
-  f46: ["A", "G", "J"], f47: ["A", "G", "J", "L"],
+  f46: ["A", "G", "J"], f47: ["A", "G", "J"],
   s50: ["G", "J", "K"], s51: ["G", "J", "K"], s52: ["A", "G", "J", "K"],
-  s53: ["A", "G", "J", "K"], s54: ["D", "G", "J", "L"],
+  s53: ["A", "G", "J", "K"], s54: ["D", "G", "J"],
   m60: ["A", "C", "G", "J"], m61: ["A", "C", "G", "J"], m62: ["A", "C", "G", "J"],
-  m63: ["A", "C", "G"], m64: ["A", "G", "J", "L"], m65: ["A", "C", "G"],
+  m63: ["A", "C", "G"], m64: ["A", "G", "J"], m65: ["A", "C", "G"],
   g01: ["G"], g09: ["G"],
 }
 
@@ -471,7 +471,6 @@ export const ALLERGEN_LEGEND: { key: string; label: string }[] = [
   { key: "I", label: "Sellerie" },
   { key: "J", label: "Senf" },
   { key: "K", label: "Sesam" },
-  { key: "L", label: "Schwefeldioxid / Sulfite" },
   { key: "M", label: "Lupinen" },
   { key: "N", label: "Weichtiere" },
 ]
