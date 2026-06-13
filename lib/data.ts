@@ -17,11 +17,17 @@ export const REST = {
   email: "antalyadoener6@gmail.com",
   address: "Am Florapark 125, 39128 Magdeburg",
   maps: "https://www.google.com/maps/search/?api=1&query=Antalya+D%C3%B6ner+%26+Kebab+Am+Florapark+125+39128+Magdeburg",
+  // Opens Google Maps route planning; the user's current location is used as the start automatically
+  directions:
+    "https://www.google.com/maps/dir/?api=1&destination=Antalya+D%C3%B6ner+%26+Kebab+Am+Florapark+125+39128+Magdeburg",
+  // Opens the Google Maps business profile (reviews + "Write a review"); works on desktop and opens the Maps app on mobile
+  review:
+    "https://www.google.com/maps/search/?api=1&query=Antalya%20D%C3%B6ner%20%26%20Kebab%2C%20Am%20Florapark%20125%2C%2039128%20Magdeburg",
 }
 
 export const TR = {
   de: {
-    nav: { menu: "Speisekarte", about: "Über uns", contact: "Kontakt", callOrder: "Anrufen & Bestellen" },
+    nav: { menu: "Speisekarte", about: "Über uns", contact: "Kontakt", callOrder: "Anrufen & Bestellen", review: "Bewertung" },
     hero: {
       subline: "Magdeburgs heißester Döner — frisch geschnitten am Florapark.",
       preorder: "Jetzt vorbestellen",
@@ -45,6 +51,8 @@ export const TR = {
       empty: "Noch nichts ausgewählt.",
       emptyHint: "Tipp auf ein Gericht, um es hinzuzufügen.",
       total: "Gesamt",
+      grandTotal: "Ihr Gesamtbetrag",
+      placeOrder: "Bestellung aufgeben",
       payNote: "Zahlung bei Abholung — nur Barzahlung",
       checkout: "Telefonisch bestellen",
       callInstruction: "Ruf an und nenn uns deine Bestellung!",
@@ -92,7 +100,7 @@ export const TR = {
     },
   },
   en: {
-    nav: { menu: "Menu", about: "About", contact: "Contact", callOrder: "Call & Order" },
+    nav: { menu: "Menu", about: "About", contact: "Contact", callOrder: "Call & Order", review: "Review" },
     hero: {
       subline: "Magdeburg's hottest döner — freshly sliced at Florapark.",
       preorder: "Pre-order now",
@@ -116,6 +124,8 @@ export const TR = {
       empty: "Nothing selected yet.",
       emptyHint: "Tap a dish to add it.",
       total: "Total",
+      grandTotal: "Your total",
+      placeOrder: "Place order",
       payNote: "Payment on pickup — cash only",
       checkout: "Order by phone",
       callInstruction: "Call us and tell us your order!",
@@ -163,7 +173,7 @@ export const TR = {
     },
   },
   tr: {
-    nav: { menu: "Menü", about: "Hakkımızda", contact: "İletişim", callOrder: "Ara & Sipariş Ver" },
+    nav: { menu: "Menü", about: "Hakkımızda", contact: "İletişim", callOrder: "Ara & Sipariş Ver", review: "Değerlendir" },
     hero: {
       subline: "Magdeburg'un en lezzetli döneri — Florapark'ta taze kesim.",
       preorder: "Hemen ön sipariş",
@@ -187,6 +197,8 @@ export const TR = {
       empty: "Henüz seçim yok.",
       emptyHint: "Eklemek için bir yemeğe dokun.",
       total: "Toplam",
+      grandTotal: "Toplam tutarınız",
+      placeOrder: "Sipariş ver",
       payNote: "Teslim alırken ödeme — sadece nakit",
       checkout: "Telefonla sipariş ver",
       callInstruction: "Bizi ara ve siparişini ilet!",
@@ -234,7 +246,7 @@ export const TR = {
     },
   },
   ar: {
-    nav: { menu: "قائمة الطعام", about: "من نحن", contact: "اتصل بنا", callOrder: "اتصل واطلب" },
+    nav: { menu: "قائمة الطعام", about: "من نحن", contact: "اتصل بنا", callOrder: "اتصل واطلب", review: "تقييم" },
     hero: {
       subline: "ألذ دونر في ماغدبورغ — مقطّع طازجاً في فلوراپارك.",
       preorder: "اطلب مسبقاً الآن",
@@ -246,7 +258,7 @@ export const TR = {
     categories: {
       doner: "أطباق الدونر",
       pizza: "بيتزا تركية",
-      durum: "دورم",
+      durum: "��ورم",
       teller: "أطباق وعلب",
       fastfood: "وجبات سريعة",
       salate: "سلطات",
@@ -258,6 +270,8 @@ export const TR = {
       empty: "لم يتم اختيار شيء بعد.",
       emptyHint: "اضغط على طبق لإضافته.",
       total: "الإجمالي",
+      grandTotal: "إجمالي طلبك",
+      placeOrder: "إرسال الطلب",
       payNote: "الدفع عند الاستلام — نقداً فقط",
       checkout: "اطلب عبر الهاتف",
       callInstruction: "اتصل بنا وأخبرنا بطلبك!",
@@ -449,13 +463,13 @@ export const ALLERGENS: Record<string, string[]> = {
   t30: ["A", "G", "J"], t31: ["A", "G", "J"], t32: ["A", "G", "J"], t33: ["A", "G", "J"],
   t34: ["A", "G", "J"], t35: ["A", "G", "J"], t36: ["A", "G", "J"], t37: ["A", "G", "J"],
   t38: ["A", "G", "J"], t39: ["A", "G", "J"],
-  f40: ["A", "L"], f41: ["A", "C", "G"], f42: ["A", "C", "G", "J"],
+  f40: ["A"], f41: ["A", "C", "G"], f42: ["A", "C", "G", "J"],
   f43: ["A", "C", "G", "J"], f44: ["A", "C", "G", "J"], f45: ["A", "C", "G"],
-  f46: ["A", "G", "J"], f47: ["A", "G", "J", "L"],
+  f46: ["A", "G", "J"], f47: ["A", "G", "J"],
   s50: ["G", "J", "K"], s51: ["G", "J", "K"], s52: ["A", "G", "J", "K"],
-  s53: ["A", "G", "J", "K"], s54: ["D", "G", "J", "L"],
+  s53: ["A", "G", "J", "K"], s54: ["D", "G", "J"],
   m60: ["A", "C", "G", "J"], m61: ["A", "C", "G", "J"], m62: ["A", "C", "G", "J"],
-  m63: ["A", "C", "G"], m64: ["A", "G", "J", "L"], m65: ["A", "C", "G"],
+  m63: ["A", "C", "G"], m64: ["A", "G", "J"], m65: ["A", "C", "G"],
   g01: ["G"], g09: ["G"],
 }
 
@@ -471,7 +485,6 @@ export const ALLERGEN_LEGEND: { key: string; label: string }[] = [
   { key: "I", label: "Sellerie" },
   { key: "J", label: "Senf" },
   { key: "K", label: "Sesam" },
-  { key: "L", label: "Schwefeldioxid / Sulfite" },
   { key: "M", label: "Lupinen" },
   { key: "N", label: "Weichtiere" },
 ]

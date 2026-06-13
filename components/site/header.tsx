@@ -8,9 +8,10 @@ interface HeaderProps {
   setLang: (l: Lang) => void
   t: any
   phoneHref: string
+  reviewHref: string
 }
 
-export function SiteHeader({ lang, setLang, t, phoneHref }: HeaderProps) {
+export function SiteHeader({ lang, setLang, t, phoneHref, reviewHref }: HeaderProps) {
   return (
     <header
       data-header=""
@@ -128,6 +129,7 @@ export function SiteHeader({ lang, setLang, t, phoneHref }: HeaderProps) {
                   }}
                 >
                   <span
+                    className="flag-fill"
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.9 }}
                     dangerouslySetInnerHTML={{ __html: FLAGS[l.code] }}
                   />
@@ -154,6 +156,41 @@ export function SiteHeader({ lang, setLang, t, phoneHref }: HeaderProps) {
                 </button>
               )
             })}
+            <a
+              href={reviewHref}
+              target="_blank"
+              rel="noopener"
+              aria-label={t.nav.review}
+              className="px-3 py-2.5 md:px-[15px] md:py-[11px]"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 7,
+                textDecoration: "none",
+                fontFamily: "var(--font-bricolage), sans-serif",
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: ".03em",
+                fontSize: 12.5,
+                color: "#f3b955",
+                background: "rgba(245,197,24,.1)",
+                border: "1px solid rgba(245,197,24,.35)",
+                borderRadius: 999,
+                whiteSpace: "nowrap",
+              }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+                style={{ flexShrink: 0 }}
+              >
+                <path d="M12 2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.02 6.1 20.13l1.13-6.57L2.45 8.9l6.6-.96L12 2z" />
+              </svg>
+              <span className="hidden md:inline">{t.nav.review}</span>
+            </a>
             <a
               href={phoneHref}
               aria-label={t.nav.callOrder}

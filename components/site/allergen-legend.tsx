@@ -1,6 +1,11 @@
-import { ALLERGEN_LEGEND } from "@/lib/data"
+import { ALLERGEN_LEGEND, ALLERGENS } from "@/lib/data"
 
 export function AllergenLegend() {
+  // Only show allergens that actually occur in at least one dish or drink
+  const usedKeys = new Set<string>()
+  Object.values(ALLERGENS).forEach((list) => list.forEach((k) => usedKeys.add(k)))
+  const legend = ALLERGEN_LEGEND.filter((a) => usedKeys.has(a.key))
+
   return (
     <section style={{ padding: "0 24px 64px" }}>
       <div
@@ -34,7 +39,7 @@ export function AllergenLegend() {
             marginBottom: 18,
           }}
         >
-          {ALLERGEN_LEGEND.map((a) => (
+          {legend.map((a) => (
             <span
               key={a.key}
               style={{ fontFamily: "var(--font-space-mono), monospace", fontSize: 11.5, color: "rgba(247,239,227,.65)" }}
