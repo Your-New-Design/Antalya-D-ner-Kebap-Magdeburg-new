@@ -130,16 +130,8 @@ export function SiteHeader({ lang, setLang, t, phoneHref, reviewHref }: HeaderPr
                 >
                   <span
                     className="flag-fill"
-                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.9 }}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
                     dangerouslySetInnerHTML={{ __html: FLAGS[l.code] }}
-                  />
-                  <span
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: on ? "rgba(8,10,14,.32)" : "rgba(8,10,14,.58)",
-                      transition: "background .2s",
-                    }}
                   />
                   <span
                     style={{
@@ -148,7 +140,8 @@ export function SiteHeader({ lang, setLang, t, phoneHref, reviewHref }: HeaderPr
                       fontSize: 12,
                       fontWeight: 700,
                       letterSpacing: ".06em",
-                      color: on ? "#f3b955" : "#eceef1",
+                      color: on ? "#fff" : "#fff",
+                      textShadow: "0 1px 3px rgba(0,0,0,.95), 0 0 2px rgba(0,0,0,.9)",
                     }}
                   >
                     {l.label}
