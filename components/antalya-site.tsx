@@ -25,7 +25,7 @@ export function AntalyaSite() {
   const [lang, setLangState] = useState<Lang>("de")
   const [cat, setCat] = useState<Cat>("doner")
   const [order, setOrder] = useState<Record<string, number>>({})
-  const [note, setNote] = useState("")
+  const [notes, setNotes] = useState<Record<string, string>>({})
   const [mounted, setMounted] = useState(false)
 
   const [imprintOpen, setImprintOpen] = useState(false)
@@ -44,8 +44,11 @@ export function AntalyaSite() {
       if (savedLang && ["de", "en", "tr", "ar"].includes(savedLang)) setLangState(savedLang)
       const savedOrder = localStorage.getItem(ORDER_KEY)
       if (savedOrder) setOrder(JSON.parse(savedOrder))
-      const savedNote = localStorage.getItem(NOTE_KEY)
-      if (savedNote) setNote(savedNote)
+      const savedNotes = localStorage.getItem(NOTE_KEY)
+      if (savedNotes) {
+        const parsed = JSON.parse(savedNotes)
+        if (parsed && typeof parsed === "object") setNotes(parsed)
+      }
       const savedConsent = localStorage.getItem(COOKIE_KEY) as "all" | "necessary" | null
       if (savedConsent === "all" || savedConsent === "necessary") setConsent(savedConsent)
     } catch {
@@ -78,11 +81,11 @@ export function AntalyaSite() {
   useEffect(() => {
     if (!mounted) return
     try {
-      localStorage.setItem(NOTE_KEY, note)
+      localStorage.setItem(NOTE_KEY, JSON.stringify(notes))
     } catch {
       /* ignore */
     }
-  }, [note, mounted])
+  }, [notes, mounted])
 
   const setLang = useCallback((l: Lang) => setLangState(l), [])
 
@@ -94,10 +97,22 @@ export function AntalyaSite() {
     setOrder((o) => {
       const next = { ...o }
       const v = (next[id] || 0) - 1
-      if (v <= 0) delete next[id]
-      else next[id] = v
+      if (v <= 0) {
+        delete next[id]
+        // drop the per-item note when the dish is fully removed
+        setNotes((n) => {
+          if (!(id in n)) return n
+          const nn = { ...n }
+          delete nn[id]
+          return nn
+        })
+      } else next[id] = v
       return next
     })
+  }, [])
+
+  const setItemNote = useCallback((id: string, v: string) => {
+    setNotes((n) => ({ ...n, [id]: v }))
   }, [])
 
   const acceptAll = useCallback(() => {
@@ -145,8 +160,8 @@ export function AntalyaSite() {
           order={order}
           add={add}
           dec={dec}
-          note={note}
-          setNote={setNote}
+          notes={notes}
+          setItemNote={setItemNote}
           phone={REST.phone}
           phoneHref={REST.phoneHref}
         />
