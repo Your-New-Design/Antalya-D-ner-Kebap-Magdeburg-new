@@ -575,20 +575,7 @@ export function MenuSection({ lang, t, cat, setCat, order, add, dec, notes, setI
                         boxShadow: "0 14px 34px -12px rgba(232,64,31,.6)",
                       }}
                     >
-                      <svg
-                        width="17"
-                        height="17"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
-                      </svg>
-                      {phone}
+                      {t.cart.placeOrder}
                     </button>
                     <p
                       style={{
@@ -684,34 +671,51 @@ export function MenuSection({ lang, t, cat, setCat, order, add, dec, notes, setI
               {orderIds.map((id) => {
                 const m = allItems[id]
                 const q = order[id]
+                const itemNote = (notes[id] || "").trim()
                 return (
-                  <div key={id} style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12 }}>
-                    <span style={{ display: "flex", gap: 9, minWidth: 0 }}>
+                  <div key={id} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12 }}>
+                      <span style={{ display: "flex", gap: 9, minWidth: 0 }}>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-bricolage), sans-serif",
+                            fontWeight: 800,
+                            fontSize: 17,
+                            color: "#f5c518",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {q}×
+                        </span>
+                        <span style={{ fontFamily: "var(--font-bricolage), sans-serif", fontSize: 17, color: "#f7efe3" }}>
+                          {m.name[lang]}
+                        </span>
+                      </span>
                       <span
                         style={{
                           fontFamily: "var(--font-bricolage), sans-serif",
-                          fontWeight: 800,
-                          fontSize: 17,
-                          color: "#f5c518",
-                          flexShrink: 0,
+                          fontSize: 16,
+                          color: "rgba(247,239,227,.6)",
+                          whiteSpace: "nowrap",
                         }}
                       >
-                        {q}×
+                        {fmt(m.price * q)}
                       </span>
-                      <span style={{ fontFamily: "var(--font-bricolage), sans-serif", fontSize: 17, color: "#f7efe3" }}>
-                        {m.name[lang]}
-                      </span>
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-bricolage), sans-serif",
-                        fontSize: 16,
-                        color: "rgba(247,239,227,.6)",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {fmt(m.price * q)}
-                    </span>
+                    </div>
+                    {itemNote && (
+                      <p
+                        style={{
+                          margin: 0,
+                          paddingLeft: 28,
+                          fontFamily: "var(--font-space-mono), monospace",
+                          fontSize: 12.5,
+                          lineHeight: 1.4,
+                          color: "#f3b955",
+                        }}
+                      >
+                        {t.cart.noteLabel}: {itemNote}
+                      </p>
+                    )}
                   </div>
                 )
               })}
