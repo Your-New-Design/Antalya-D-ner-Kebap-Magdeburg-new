@@ -20,6 +20,7 @@ interface MenuProps {
 
 export function MenuSection({ lang, t, cat, setCat, order, add, dec, notes, setItemNote, phone, phoneHref }: MenuProps) {
   const [cartOpen, setCartOpen] = useState(false)
+  const [summaryOpen, setSummaryOpen] = useState(false)
   const items = MENU[cat]
   const catTitle = t.categories[cat]
 
@@ -551,13 +552,16 @@ export function MenuSection({ lang, t, cat, setCat, order, add, dec, notes, setI
                     <p style={{ fontSize: 12, color: "rgba(247,239,227,.5)", margin: "0 0 12px" }}>
                       {t.cart.callInstruction}
                     </p>
-                    <a
-                      href={phoneHref}
+                    <button
+                      onClick={() => setSummaryOpen(true)}
                       style={{
+                        width: "100%",
+                        cursor: "pointer",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         gap: 9,
+                        border: "none",
                         textDecoration: "none",
                         fontFamily: "var(--font-bricolage), sans-serif",
                         fontWeight: 800,
@@ -585,7 +589,7 @@ export function MenuSection({ lang, t, cat, setCat, order, add, dec, notes, setI
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
                       </svg>
                       {phone}
-                    </a>
+                    </button>
                     <p
                       style={{
                         fontFamily: "var(--font-space-mono), monospace",
@@ -603,6 +607,205 @@ export function MenuSection({ lang, t, cat, setCat, order, add, dec, notes, setI
             </div>
           </div>
         </>
+      )}
+
+      {/* Order summary modal — opens when the phone button is clicked */}
+      {summaryOpen && hasItems && (
+        <div
+          onClick={() => setSummaryOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={t.cart.title}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 80,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 18,
+            background: "rgba(10,8,6,.7)",
+            backdropFilter: "blur(3px)",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: "100%",
+              maxWidth: 460,
+              maxHeight: "calc(100dvh - 36px)",
+              overflowY: "auto",
+              background: "linear-gradient(168deg,rgba(28,22,17,.99),rgba(18,14,11,.99))",
+              border: "1px solid rgba(245,197,24,.55)",
+              borderRadius: 22,
+              boxShadow: "0 30px 80px -24px rgba(0,0,0,.8)",
+              padding: "26px 26px 28px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
+              <h3
+                style={{
+                  fontFamily: "var(--font-bricolage), sans-serif",
+                  fontWeight: 800,
+                  fontSize: 28,
+                  textTransform: "uppercase",
+                  letterSpacing: ".01em",
+                  lineHeight: 1,
+                  margin: 0,
+                  color: "#f7efe3",
+                }}
+              >
+                {t.cart.title}
+              </h3>
+              <button
+                onClick={() => setSummaryOpen(false)}
+                aria-label="✕"
+                style={{
+                  flexShrink: 0,
+                  width: 40,
+                  height: 40,
+                  borderRadius: 12,
+                  border: "1px solid rgba(247,239,227,.18)",
+                  background: "transparent",
+                  color: "#f7efe3",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 20,
+                  lineHeight: 1,
+                }}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, margin: "22px 0 0" }}>
+              {orderIds.map((id) => {
+                const m = allItems[id]
+                const q = order[id]
+                return (
+                  <div key={id} style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12 }}>
+                    <span style={{ display: "flex", gap: 9, minWidth: 0 }}>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-bricolage), sans-serif",
+                          fontWeight: 800,
+                          fontSize: 17,
+                          color: "#f5c518",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {q}×
+                      </span>
+                      <span style={{ fontFamily: "var(--font-bricolage), sans-serif", fontSize: 17, color: "#f7efe3" }}>
+                        {m.name[lang]}
+                      </span>
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "var(--font-bricolage), sans-serif",
+                        fontSize: 16,
+                        color: "rgba(247,239,227,.6)",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {fmt(m.price * q)}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+
+            <div style={{ borderTop: "1px solid rgba(247,239,227,.14)", margin: "22px 0 0", paddingTop: 20 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+                <span
+                  style={{
+                    fontFamily: "var(--font-bricolage), sans-serif",
+                    fontWeight: 800,
+                    fontSize: 18,
+                    textTransform: "uppercase",
+                    letterSpacing: ".02em",
+                    color: "#f7efe3",
+                  }}
+                >
+                  {t.cart.grandTotal}
+                </span>
+                <span
+                  style={{
+                    fontFamily: "var(--font-bricolage), sans-serif",
+                    fontWeight: 800,
+                    fontSize: 30,
+                    color: "#f5c518",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {fmt(total)}
+                </span>
+              </div>
+            </div>
+
+            <p
+              style={{
+                textAlign: "center",
+                fontFamily: "var(--font-bricolage), sans-serif",
+                fontWeight: 700,
+                fontSize: 18,
+                color: "#f7efe3",
+                margin: "26px 0 16px",
+              }}
+            >
+              {t.cart.callInstruction}
+            </p>
+
+            <a
+              href={phoneHref}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 11,
+                textDecoration: "none",
+                fontFamily: "var(--font-bricolage), sans-serif",
+                fontWeight: 800,
+                fontSize: 22,
+                color: "#f7efe3",
+                background: "#c0241a",
+                padding: "18px 16px",
+                borderRadius: 16,
+                boxShadow: "0 18px 40px -14px rgba(192,36,26,.7)",
+              }}
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              {phone}
+            </a>
+
+            <p
+              style={{
+                textAlign: "center",
+                fontFamily: "var(--font-bricolage), sans-serif",
+                fontWeight: 700,
+                fontSize: 14,
+                color: "#e8401f",
+                margin: "16px 0 0",
+              }}
+            >
+              {t.cart.noWhatsapp}
+            </p>
+          </div>
+        </div>
       )}
     </section>
   )
